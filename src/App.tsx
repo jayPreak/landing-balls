@@ -5,6 +5,9 @@ import { Github, Twitter, Linkedin, Code2, Sparkles, FileCode, Rocket } from 'lu
 function InteractiveBackground() {
   const svgRef = useRef<SVGSVGElement>(null);
 
+  console.log({svgRef})
+  console.log("HELLO WORLDDDSBDFJKSDKHBFSKH")
+
   useEffect(() => {
     if (!svgRef.current) return;
 
@@ -104,7 +107,10 @@ function InteractiveBackground() {
   );
 }
 
+import { usePostHog } from 'posthog-js/react';
+
 function App() {
+  const posthog = usePostHog();
   return (
     <div className="min-h-screen text-white relative overflow-hidden">
       <InteractiveBackground />
@@ -165,6 +171,12 @@ function App() {
           </div>
 
           <p className="text-gray-400 mb-8">Let Jay assist you in building your next great project</p>
+          <button
+            className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition-colors mt-4"
+            onClick={() => posthog.capture('my event', { property: 'JAYESH' })}
+          >
+            PostHog Event
+          </button>
         </div>
       </main>
     </div>
